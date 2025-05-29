@@ -26,7 +26,7 @@ This project demonstrates a complete local data warehouse automation pipeline, b
 
 - [📖 Project Overview](#-project-overview)
 - [🛠 Tech Stack](#-tech-stack)
-- [🏗️ Data Architecture](#data-architecture)
+- [Architecture](#architecture)
 - [🔄 Pipeline Process](#-pipeline-process)
 - [🧩 Component Breakdown](#-component-breakdown)
 - [📂 Repository Structure](#-repository-structure)
@@ -45,7 +45,7 @@ This project demonstrates a complete local data warehouse automation pipeline, b
 - **Python 3.8+**
   
 ---
-## 🏗️ Data Architecture
+## Architecture
 
 The data architecture for this project follows Medallion Architecture **Bronze**, **Silver**, and **Gold** layers:
 ![Image](https://github.com/user-attachments/assets/d70f3ca8-637a-4b4f-a12a-b9a96d400205)
