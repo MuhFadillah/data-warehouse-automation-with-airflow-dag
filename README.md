@@ -50,7 +50,7 @@ data_engineering/
 │   └── run-jupyter.sh             # Script to run JupyterLab
 ```
 ---
-## 🔄 Pipeline Process
+### 🔄 Pipeline Process
 
 This project implements a modular, end-to-end **data pipeline** that mirrors real-world data engineering architecture. The process starts from **raw local CSV files**, which are ingested into a **data lake** (MinIO), then transformed using **PySpark** scripts triggered by **Apache Airflow DAGs**, and finally loaded into a **DuckDB-based Data Warehouse** for further modeling and analytics.
 
