@@ -26,7 +26,7 @@ This project demonstrates a complete local data warehouse automation pipeline, b
 
 - [📖 Project Overview](#-project-overview)
 - [🛠 Tech Stack](#-tech-stack)
-- [🏗️ Data Architecture](#-data-architecture)
+- [🏗️ Data Architecture](#data-architecture)
 - [🔄 Pipeline Process](#-pipeline-process)
 - [🧩 Component Breakdown](#-component-breakdown)
 - [📂 Repository Structure](#-repository-structure)
