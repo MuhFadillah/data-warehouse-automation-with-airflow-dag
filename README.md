@@ -1,4 +1,7 @@
-# data-warehouse-automation-with-airflow-dag
+# Data Warehouse Automation With Airflow DAG Project
+
+Welcome to the **Data Warehouse Automation With Airflow DAG Project (Data Engineer)** repository! 🚀  
+This project showcases a complete data engineering workflow from ingesting raw data into a Data Lake, transforming it via PySpark, orchestrating pipelines with Apache Airflow, to storing structured data in a Data Warehouse for analytics.  
 
 ---
 ## 🏗️ Data Architecture
