@@ -24,13 +24,13 @@ This project demonstrates a complete local data warehouse automation pipeline, b
 ---
 ## 📚 Table of Contents
 
-- [📖 Project Overview](#project-overview)
-- [🛠 Tech Stack](#tech-stack)
-- [🏗️ Data Architecture](#data-architecture)
-- [🔄 Pipeline Process](#pipeline-process)
-- [🧩 Component Breakdown](#component-breakdown)
-- [📂 Repository Structure](#repository-structure)
-- [📊 Output & Insights](#output--insights)
+- [📖 Project Overview](#-project-overview)
+- [🛠 Tech Stack](#-tech-stack)
+- [🏗️ Data Architecture](#-data-architecture)
+- [🔄 Pipeline Process](#-pipeline-process)
+- [🧩 Component Breakdown](#-component-breakdown)
+- [📂 Repository Structure](#-repository-structure)
+- [📊 Output & Insights](#-output-&-insights)
 - [Setup & Installation](#setup--installation)
 - [Usage](#usage)
 
