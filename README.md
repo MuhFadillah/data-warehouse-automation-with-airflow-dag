@@ -4,6 +4,24 @@ Welcome to the **Data Warehouse Automation With Airflow DAG Project (Data Engine
 This project showcases a complete data engineering workflow from ingesting raw data into a Data Lake, transforming it via PySpark, orchestrating pipelines with Apache Airflow, to storing structured data in a Data Warehouse for analytics.  
 
 ---
+## 📖 Project Overview
+
+This project demonstrates a complete local data warehouse automation pipeline, built using modern open-source tools. It covers the full journey of data from ingestion to analytics and is structured to follow best practices in modularity, orchestration, and scalability.
+
+1. **Data Lake Architecture**: Implements a two-tier data lake structure (raw & clean) using MinIO to mimic S3-like object storage.
+2. **ETL/ELT Pipeline**: Uses PySpark scripts to perform transformations and loading processes, triggered via Apache Airflow DAGs.
+3. **Data Orchestration**: Airflow automates and monitors the entire data pipeline for repeatability and reliability.
+4. **Lightweight Data Warehouse**: DuckDB is used as an embedded OLAP database to store transformed datasets optimized for analysis.
+
+🎯 This repository is ideal for those who want to showcase hands-on experience in:
+- Data Engineering  
+- ETL/ELT Automation  
+- Apache Airflow DAG Design  
+- PySpark Data Transformation  
+- Data Lake to Warehouse Workflow  
+- Local Development Stack with DuckDB  
+
+---
 ## 🏗️ Data Architecture
 
 The data architecture for this project follows Medallion Architecture **Bronze**, **Silver**, and **Gold** layers:
