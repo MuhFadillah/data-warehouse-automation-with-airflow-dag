@@ -82,6 +82,24 @@ Each stage is orchestrated to simulate a scalable and automated ELT (Extract-Loa
           └────────────────────────────┘
 
 ```
+### 🧩 Component Breakdown
+
+Here is a detailed explanation of each component involved in the pipeline:
+
+- **Source Dataset**  
+  CSV files containing raw transactional or reference data. These files are stored locally and serve as the starting point of the pipeline.
+
+- **MinIO (Data Lake)**  
+  A local object storage system that mimics Amazon S3. It is used to store both raw and cleaned versions of the dataset in separate buckets (`raw/` and `clean/`), ensuring data lineage and accessibility.
+
+- **PySpark (ELT Scripts)**  
+  PySpark scripts perform data ingestion from MinIO, cleaning, transformation, and data loading into the warehouse. Located in `spark/scripts/`, these scripts are triggered automatically by Airflow.
+
+- **Airflow (Orchestration/DAG)**  
+  Apache Airflow is used to orchestrate the entire workflow. DAGs are defined to automate tasks such as reading from MinIO, running PySpark transformations, and updating the warehouse, enabling full automation and scheduling.
+
+- **DuckDB (Data Warehouse)**  
+  A lightweight analytical database used to store transformed data. This acts as the final destination of the pipeline, allowing for fast querying and analytical processing in a local development environment.
 
 ---
 ## 📊 Output & Insights
