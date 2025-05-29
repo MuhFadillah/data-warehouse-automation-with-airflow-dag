@@ -12,7 +12,7 @@ The data architecture for this project follows Medallion Architecture **Bronze**
 1. **Bronze Layer**: Stores raw data as-is from the source systems. Data is ingested from CSV Files into Minio bucket raw.
 2. **Silver Layer**: This layer includes data cleansing, standardization, and normalization processes to prepare data for analysis.
 3. **Gold Layer**: Houses business-ready data modeled into a star schema required for reporting and analytics. Adding
-4. **Airflow**: Orchestrates the ELT pipeline, Supports scheduled and DAG execution
+4. **Airflow**: For orchestrates the ELT pipeline, Supports scheduled and DAG execution
 
 ---
 
@@ -50,3 +50,5 @@ data_engineering/
 │   └── run-jupyter.sh             # Script to run JupyterLab
 ```
 ---
+## 📊 Output & Insights
+This pipeline simulates a real-world batch data pipeline and prepares structured data for further analysis and visualization in tools like Power BI or Metabase.
