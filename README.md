@@ -1,5 +1,18 @@
 # data-warehouse-automation-with-airflow-dag
 
+---
+## 🏗️ Data Architecture
+
+The data architecture for this project follows Medallion Architecture **Bronze**, **Silver**, and **Gold** layers:
+![Image](https://github.com/user-attachments/assets/8621fdbb-42d7-47b7-934d-d76b248c66fb)
+
+1. **Bronze Layer**: Stores raw data as-is from the source systems. Data is ingested from CSV Files into Minio bucket raw.
+2. **Silver Layer**: This layer includes data cleansing, standardization, and normalization processes to prepare data for analysis.
+3. **Gold Layer**: Houses business-ready data modeled into a star schema required for reporting and analytics. Adding
+4. **Airflow**: Orchestrates the ELT pipeline, Supports scheduled and DAG execution
+
+---
+
 ## 📂 Repository Structure
 ```
 data_engineering/
