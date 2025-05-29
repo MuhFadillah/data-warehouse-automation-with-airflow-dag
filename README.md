@@ -50,5 +50,39 @@ data_engineering/
 │   └── run-jupyter.sh             # Script to run JupyterLab
 ```
 ---
+## 🔄 Pipeline Process
+
+This project implements a modular, end-to-end **data pipeline** that mirrors real-world data engineering architecture. The process starts from **raw local CSV files**, which are ingested into a **data lake** (MinIO), then transformed using **PySpark** scripts triggered by **Apache Airflow DAGs**, and finally loaded into a **DuckDB-based Data Warehouse** for further modeling and analytics.
+
+Each stage is orchestrated to simulate a scalable and automated ELT (Extract-Load-Transform) workflow.
+```
+                         ┌──────────────────────────┐
+                         │      Source Dataset      │
+                         │   (csv di folder local)  │
+                         └────────────┬─────────────┘
+                                      │
+                                      ▼
+                         ┌──────────────────────────┐
+                         │     MinIO (Data Lake)    │
+                         │   raw/ & clean/ bucket   │
+                         └────────────┬─────────────┘
+                                      │
+                     ┌────────────────┴────────────────┐
+                     │                                 │
+                     ▼                                 ▼
+          ┌────────────────────┐            ┌─────────────────────┐
+          │    PySpark (ELT)   │            │     Airflow (DAG)   │
+          │ spark/scripts/*.py │◄───────────┤ trigger via DAG run │
+          └─────────┬──────────┘            └─────────────────────┘
+                    │ 
+                    ▼                                    
+          ┌────────────────────────────┐
+          │   DuckDB (Data Warehouse)  │
+          │  duckdb/db/dev.duckdb      │
+          └────────────────────────────┘
+
+```
+
+---
 ## 📊 Output & Insights
 This pipeline simulates a real-world batch data pipeline and prepares structured data for further analysis and visualization in tools like Power BI or Metabase.
