@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Aktifkan virtual environment
+# Enable virtual environment
 source ./spark_venv/bin/activate
 
-# Jalankan JupyterLab
+# Run JupyterLab
 jupyter lab
