@@ -125,12 +125,6 @@ data_engineering/
 │   │    └── CUST_AZ12.csv/   
 │   │    └── LOC_A101.csv/   
 │   │    └── PX_CAT_G1V2.csv/  
-├── dbt/
-│   ├── dbt_venv/                  ← dbt virtual environment
-│   ├── logs/                      ← dbt.log
-│   └── my_dbt_project/            ← The dbt project contains models, seeds, etc
-├── duckdb/
-│   └── db/                        ← datawarehouse
 ├── minio/
 │   ├── data/                      # Data folder for MinIO
 │   ├── minio                      # Binary MinIO
