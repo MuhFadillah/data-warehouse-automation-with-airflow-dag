@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Aktifkan virtual environment
+# Enable virtual environment
 source airflow_venv/bin/activate
 
-# Set lokasi direktori konfigurasi Airflow
+# Set the location of the Airflow configuration directory
 export AIRFLOW_HOME=$(pwd)/airflow_venv/airflowhome
 
-# Jalankan Airflow webserver di port 8080
+# Run Airflow webserver on port 8080
 airflow webserver --port 8080
