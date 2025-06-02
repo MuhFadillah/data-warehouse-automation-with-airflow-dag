@@ -11,9 +11,9 @@ default_args = {
 with DAG(
     dag_id='elt_erp_cust_az12_dag',
     default_args=default_args,
-    schedule_interval=None,  # Ubah ke '0 1 * * *' jika mau dijalankan otomatis harian jam 1 pagi
+    schedule_interval=None,  # Change to '0 1 * * *' if you want it to run automatically every day at 1am.
     catchup=False,
-    description='DAG untuk menjalankan ELT ERP Cust az12 via PySpark dan MinIO',
+    description='DAG to run ELT ERP Cust az12 via PySpark and MinIO',
     tags=['elt', 'spark', 'minio'],
 ) as dag:
 
