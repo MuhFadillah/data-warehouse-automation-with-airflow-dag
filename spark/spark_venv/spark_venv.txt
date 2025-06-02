@@ -1,0 +1,4 @@
+python3 -m venv spark_venv
+
+you can activate venv like this way :
+source spark_venv/bin/activate
