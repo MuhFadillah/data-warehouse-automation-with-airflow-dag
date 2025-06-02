@@ -1,1 +1,4 @@
 python3 -m venv airflow_venv
+
+you can activate venv like this way :
+source airflow_venv/bin/activate
