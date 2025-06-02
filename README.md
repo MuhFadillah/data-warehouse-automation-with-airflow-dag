@@ -31,9 +31,6 @@ This project demonstrates a complete local data warehouse automation pipeline, b
 - [🧩 Component Breakdown](#-component-breakdown)
 - [📂 Repository Structure](#-repository-structure)
 - [📊 Output & Insights](#-output--insights)
-- [Setup & Installation](#setup--installation)
-- [Usage](#usage)
-
 
 ---
 ## 🛠 Tech Stack
