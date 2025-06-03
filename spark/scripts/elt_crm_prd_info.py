@@ -9,19 +9,19 @@ spark = SparkSession.builder \
     .appName("ELT_CRM_PRD_INFO") \
     .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.2,com.amazonaws:aws-java-sdk-bundle:1.11.901") \
     .config("spark.hadoop.fs.s3a.endpoint", "http://localhost:9000") \
-    .config("spark.hadoop.fs.s3a.access.key", "minioadmin") \
-    .config("spark.hadoop.fs.s3a.secret.key", "minioadmin123") \
+    .config("spark.hadoop.fs.s3a.access.key", "your username") \
+    .config("spark.hadoop.fs.s3a.secret.key", "your password") \
     .config("spark.hadoop.fs.s3a.path.style.access", "true") \
     .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
     .getOrCreate()
 
-# Baca file dari MinIO (raw layer)
+# Read file from MinIO (raw layer)
 df = spark.read.option("header", True).csv("s3a://raw/crm/prd_info.csv")
 
-# Buat window
+# create window
 window_spec = Window.partitionBy("prd_key").orderBy("prd_start_dt")
 
-# Transformasi
+# Transformation
 df_transformed = (
     df.select(
         "prd_id",
@@ -41,7 +41,7 @@ df_transformed = (
     .orderBy("prd_id") 
 )
 
-# Simpan hasil ke MinIO (clean layer)
+# Save results to MinIO (clean layer)
 df_transformed.write \
     .mode("overwrite") \
     .option("header", True) \
