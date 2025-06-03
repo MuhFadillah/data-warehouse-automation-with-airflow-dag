@@ -6,16 +6,16 @@ spark = SparkSession.builder \
     .appName("ELT_CRM_SALES_DETAILS") \
     .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.2,com.amazonaws:aws-java-sdk-bundle:1.11.901") \
     .config("spark.hadoop.fs.s3a.endpoint", "http://localhost:9000") \
-    .config("spark.hadoop.fs.s3a.access.key", "minioadmin") \
-    .config("spark.hadoop.fs.s3a.secret.key", "minioadmin123") \
+    .config("spark.hadoop.fs.s3a.access.key", "your username") \
+    .config("spark.hadoop.fs.s3a.secret.key", "your password") \
     .config("spark.hadoop.fs.s3a.path.style.access", "true") \
     .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
     .getOrCreate()
 
-# Baca file dari MinIO (raw layer)
+# Read file from MinIO (raw layer)
 df = spark.read.option("header", True).csv("s3a://raw/crm/sales_details.csv")
 
-# Transformasi 
+# Transformation 
 df_transformed = df.select(
     "sls_ord_num",
     "sls_prd_key",
@@ -55,7 +55,7 @@ df_transformed = df.select(
     ).alias("sls_price")
 )
 
-# Simpan hasil ke MinIO (clean layer)
+# Save results to MinIO (clean layer)
 df_transformed.write \
     .mode("overwrite") \
     .option("header", True) \
