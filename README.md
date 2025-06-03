@@ -131,6 +131,7 @@ data_engineering/
 │   ├── notebooks/                 # .ipynb for ELT, analysis with PySpark/DuckDB
 │   ├── scripts/                   # File Python (.py)
 │   └── run-jupyter.sh             # Script to run JupyterLab
+├── LICENSE                        # License repository
 ├── README.md                      # Project overview
 ```
 
