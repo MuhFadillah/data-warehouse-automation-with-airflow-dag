@@ -133,6 +133,7 @@ data_engineering/
 │   └── run-jupyter.sh             # Script to run JupyterLab
 ├── LICENSE                        # License repository
 ├── README.md                      # Project overview
+└── full installation.txt          # setup installation stack with wsl2 x ubuntu
 ```
 
 ---
