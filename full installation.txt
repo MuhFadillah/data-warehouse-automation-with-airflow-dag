@@ -1,0 +1,223 @@
+Installing all tool and package open source data engineering tech stach.
+
+for this setup installation im using (WSL2 x Ubuntu).
+
+*****************************************************************************************************************************
+1. make directory :
+mkdir minio
+mkdir spark
+mkdir airflow
+mkdir dbt
+mkdir duckdb
+*****************************************************************************************************************************
+
+*****************************************************************************************************************************
+2. install minio :
+cd ~/data_engineering/minio  					#------> change directory (this mean folder data_engineering then folder folder minio)
+mkdir data 							#------> make directory data in folder minio
+wget https://dl.min.io/server/minio/release/linux-amd64/minio 	#------> download minio
+chmod +x minio 							#------> change mode for minio (executable permission access)
+
+[----------RUNNING MINIO AS MANUAL-------------]
+export MINIO_ROOT_USER= create username
+export MINIO_ROOT_PASSWORD= create password
+./minio server ~/data_engineering/minio/data --console-address ":9001" --address ":9000"
+
+[----------MAKING ALTERNATIVE RUNNING MINIO AUTOMATE-------------]
+cd ~/data_engineering/minio
+nano run-minio.sh
+
+>>>>>>>>>>>>>>>>>>>>> Copy this below <<<<<<<<<<<<<<<<<<<<<<<<<
+#!/bin/bash
+
+export MINIO_ROOT_USER= create username (same as before)
+export MINIO_ROOT_PASSWORD= create passward (same as before)
+
+./minio server ./data --console-address ":9001" --address ":9000"
+================================================================
+
+Press CTRL + O → to save
+Press Enter → to confirm the file name
+Press CTRL + X → to exit nano
+
+chmod +x run-minio.sh						 #---------> make executable file
+./run-minio.sh							 #---------> running minio
+*****************************************************************************************************************************
+
+*****************************************************************************************************************************
+3. install spark :
+
+python3 -m venv spark_venv 					 #---------> create environtment
+source spark_venv/bin/activate 					 #---------> activate environtment
+
+pip install pyspark 						 #---------> install spark
+pip install jupyterlab 						 #---------> install jupyter package
+pip install ipykernel numpy pandas matplotlib 			 #---------> install another package
+$(which python) -m ipykernel install --user --name=spark_venv --display-name "PySpark (spark_venv)" #---------> create kernel in jupyter
+pip install duckdb duckdb-engine				 #---------> install duckdb package
+deactivate 						 	 #---------> exit environment
+mkdir notebooks							 #---------> directory for ELT process
+mkdir scripts							 #---------> directory for batch process
+
+[----------MAKING ALTERNATIVE RUNNING JUPYTER AUTOMATE-------------]
+
+cd ~/data_engineering/spark
+nano run-jupyter.sh
+
+>>>>>>>>>>>>>>>>>>>>> Copy this below <<<<<<<<<<<<<<<<<<<<<<<<<
+#!/bin/bash
+
+# Enable virtual environment
+source ./spark_venv/bin/activate
+
+# Run JupyterLab
+jupyter lab
+================================================================
+
+Press CTRL + O → to save
+Press Enter → to confirm the file name
+Press CTRL + X → to exit nano
+
+chmod +x run-jupyter.sh						 #---------> make executable file
+./run-jupyter.sh						 #---------> running jupyter
+*****************************************************************************************************************************
+
+*****************************************************************************************************************************
+4. install airflow :
+
+python3 -m venv airflow_venv 					 #---------> create environtment
+source airflow_venv/bin/activate 				 #---------> activate environtment
+
+pip install --upgrade pip setuptools wheel  			 #---------> upgrade package
+sudo apt update   						 #---------> upgrade package
+sudo apt install gcc libffi-dev libssl-dev  			 #---------> upgrade package
+sudo apt install build-essential  				 #---------> upgrade package
+
+pip install 'apache-airflow==2.10.5' \
+  --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.8.txt" #---------> install airflow package 1 (python version should 3.8)
+
+pip install 'apache-airflow[postgres,google]==2.10.5' \
+  --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.8.txt" #---------> install airflow package 2 (python version should 3.8)
+
+>>>>>>>>>>>>>>>>>>>>>>>> Save in nano ~/.bashrc <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+export AIRFLOW_HOME=~/data_engineering/airflow/airflow_venv/airflowhome		#---------> Set the environment variable AIRFLOW_HOME to point to your custom directory:
+export AIRFLOW__CORE__LOAD_EXAMPLES=False 					#---------> This command sets an environment variable so that Airflow does not load the default DAG example when it is first run.
+================================================================
+
+Press CTRL + O → to save
+Press Enter → to confirm the file name
+Press CTRL + X → to exit nano
+
+source ~/.bashrc
+
+airflow db migrate
+airflow users create --username uptoyou --firstname uptoyou --lastname uptoyou --role Admin --email uptoyou@example.com
+password : your password
+
+airflow webserver -p 8080 --workers 1 --timeout 300
+airflow version
+
+[----------MAKING ALTERNATIVE RUNNING AIRFLOW AUTOMATE-------------]
+
+cd ~/data_engineering/airflow
+nano run-airflow.sh
+
+>>>>>>>>>>>>>>>>>>>>> Copy this below <<<<<<<<<<<<<<<<<<<<<<<<<
+#!/bin/bash
+
+# Enable virtual environment
+source airflow_venv/bin/activate
+
+# Set the location of the Airflow configuration directory
+export AIRFLOW_HOME=~/data_engineering/airflow/airflow_venv/airflowhome
+
+# Run Airflow webserver on port 8080
+airflow webserver --port 8080
+================================================================
+
+chmod +x run-airflow.sh						 #---------> make executable file
+./run-airflow.sh						 #---------> running airflow
+
+NOTE IM CREATE DIRECTORY  NAME DAGS:
+cd ~/data_engineering/airflow
+mkdir dags
+
+go to airflow.cfg then change DAGS_FOLDER PATH example : /home/ubuntucoy(user)/data_engineering/airflow/dags
+
+*****************************************************************************************************************************
+
+*****************************************************************************************************************************
+5. install dbt :
+
+NOTE FOR DBT IM INSTALL ANOTHER PYTHON VERSION (3.10.17)
+
+===============================Only once (global home user, global mean the directory is cd ~ ) do not use again===================================
+sudo apt update
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+sudo apt update
+sudo apt install python3.10 python3.10-venv python3.10-dev -y
+===================================================================
+
+cd ~/data_engineering/dbt
+
+python3.10 -m venv dbt_venv 					 #---------> create environtment
+source dbt_venv/bin/activate 					 #---------> activate environtment
+
+pip install --upgrade pip 					 #---------> upgrade package
+pip install dbt-duckdb 						 #---------> install dbt
+dbt --version
+
+dbt init my_dbt_project
+
+[----------MAKING EDIT THE DATABASE CONNECTION SETTINGS USED BY DBT-------------]
+
+nano ~/.dbt/profiles.yml
+
+>>>>>>>>>>>>>>>>>>>>> Example this below <<<<<<<<<<<<<<<<<<<<<<<<<
+my_dbt_project:
+  outputs:
+    dev:
+      type: duckdb
+      path: ~/data_engineering/duckdb/db/dev.duckdb
+      threads: 1
+
+    prod:
+      type: duckdb
+      path: ~/data_engineering/duckdb/db/prod.duckdb
+      threads: 4
+
+  target: dev
+================================================================
+
+Press CTRL + O → to save
+Press Enter → to confirm the file name
+Press CTRL + X → to exit nano
+
+cd ~/data_engineering/dbt
+source dbt_venv/bin/activate					 #---------> activate environtment
+cd my_dbt_project
+mkdir -p ~/data_engineering/duckdb/db				 #---------> make directory 'duckdb/db'
+dbt debug							 #---------> activate dbt connection to datawarehouse (duckdb)
+
+This will:
+Check the connection to DuckDB at path: ~/data_engineering/duckdb/db/dev.duckdb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
